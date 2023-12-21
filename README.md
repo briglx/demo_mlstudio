@@ -6,6 +6,19 @@ This project demonstrates how to connect VS Code to Azure ML Studio and run a si
 
 ![Architecture Diagram](./docs/architecture_overview.png)
 
+## Pre-requisites
+
+Azure CLI
+
+```bash 
+# Install Azure CLI
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+# Add Azure ML extension
+az extension add --name ml
+
+```
+
 
 ## Create System Identities
 
@@ -60,6 +73,18 @@ cd ./data
 wget https://azuremlexamples.blob.core.windows.net/datasets/credit_card/default_of_credit_card_clients.csv
 ```
 
+# Development
+
+```bash
+# Connect to jumpbox
+bastion_name="core_bastion"
+rg_name="rg_connectivity_westus3"
+vm_jumpbox_name="vm-jumpbox"
+rg_jumpbox_name="rg_management_westus3"
+vm_jumpbox_id=$(az vm show --name "$vm_jumpbox_name" --resource-group "$rg_jumpbox_name" --query "id" -o tsv)
+az network bastion tunnel --name "$bastion_name" --resource-group "$rg_name" --target-resource-id "$vm_jumpbox_id" --resource-port 22 --port 50022
+
+```
 # Architecture Decisions
 
 Network Isolation: Use the [managed network - only approved outbound mode](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-network-isolation-planning?view=azureml-api-2#allow-only-approved-outbound-mode) pattern.

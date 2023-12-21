@@ -146,6 +146,24 @@ provision_common_services(){
     source "${INFRA_DIRECTORY}/common_services_deployment.sh" "$seed" --parameters "${additional_parameters[@]}"
 }
 
+provision_aml_workspace(){
+    # Provision resources for the application.
+    local deployment_name="aml_workspace.Provisioning-${run_date}"
+    local location="$1"
+    local rg_name="rg_aml_${location}"
+    local workspace_name="aml-${location}"
+
+    additional_parameters=("message=$message")
+    additional_parameters+=("rg_name=$rg_name")
+    additional_parameters+=("location=$location")
+    additional_parameters+=("workspace_name=$workspace_name")
+
+    echo "Deploying ${deployment_name} with ${additional_parameters[*]}"
+
+    # shellcheck source=/home/brlamore/src/azure_subscription_boilerplate/iac/aml_workspace_deployment.sh
+    source "${INFRA_DIRECTORY}/aml_workspace_deployment.sh" --parameters "${additional_parameters[@]}"
+}
+
 # Globals
 PROJ_ROOT_PATH=$(cd "$(dirname "$0")"/..; pwd)
 SCRIPT_DIRECTORY="${PROJ_ROOT_PATH}/script"

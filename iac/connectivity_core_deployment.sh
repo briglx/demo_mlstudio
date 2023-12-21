@@ -79,6 +79,14 @@ main(){
   # Management Subnet
   create_subnet "$subnet_management_name" "$vnet_core_name" "$rg_name" "$subnet_management_cidr"
 
+  # Save variables to .env
+  echo "Save Azure variables to ${ENV_FILE}"
+  {
+      echo ""
+      echo "# Script connectivity_core_deployment output variables."
+      echo "# Generated on ${iso_date_utc} for subscription ${AZURE_SUBSCRIPTION_ID}"
+      echo "BASTION_NAME=$bastion_name"      
+  }>> "$ENV_FILE"
 }
 
 # main --parameters location=westus3
