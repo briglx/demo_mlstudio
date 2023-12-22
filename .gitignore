@@ -160,3 +160,8 @@ cython_debug/
 #.idea/
 
 data
+az_vm_create_help.txt
+az_vm_image_list.json
+cli_arm.json
+ui_arm.json
+msnonprod.env

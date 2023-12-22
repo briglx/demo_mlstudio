@@ -11,6 +11,7 @@
 #######################################################
 
 main(){
+  iso_date_utc=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
   echo "Provisioning connectivity resources"
   # variables
   name="core"
@@ -53,7 +54,7 @@ main(){
 
   # Resource Group
   echo create_resource_group "$rg_name" "$location"
-  
+
   # Network watcher
   echo "creating network watcher in $rg_name"
   az network watcher configure --resource-group "$rg_name" --locations "$location" --enabled
@@ -75,7 +76,7 @@ main(){
 
   # Firewall Subnet
   create_subnet "$subnet_firewall_name" "$vnet_core_name" "$rg_name" "$subnet_firewall_cidr"
-  
+
   # Management Subnet
   create_subnet "$subnet_management_name" "$vnet_core_name" "$rg_name" "$subnet_management_cidr"
 
@@ -85,7 +86,7 @@ main(){
       echo ""
       echo "# Script connectivity_core_deployment output variables."
       echo "# Generated on ${iso_date_utc} for subscription ${AZURE_SUBSCRIPTION_ID}"
-      echo "BASTION_NAME=$bastion_name"      
+      echo "BASTION_NAME=$bastion_name"
   }>> "$ENV_FILE"
 }
 

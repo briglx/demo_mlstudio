@@ -89,7 +89,7 @@ provision_core_connectivity(){
     local location="$1"
     local jumpbox="$2"
     local rg_connectivity="rg_connectivity_${location}"
-    
+
     additional_parameters=("message=$message")
     additional_parameters+=("rg_name=$rg_connectivity")
     additional_parameters+=("location=$location")
@@ -99,7 +99,7 @@ provision_core_connectivity(){
     fi
 
     echo "Deploying ${deployment_name} with ${additional_parameters[*]}"
- 
+
     # shellcheck source=../iac/connectivity_core_deployment.sh
     source "${INFRA_DIRECTORY}/connectivity_core_deployment.sh" --parameters "${additional_parameters[@]}"
 }
@@ -142,7 +142,7 @@ provision_common_services(){
 
     echo "Deploying ${deployment_name} with ${additional_parameters[*]}"
 
-    # shellcheck source=/home/brlamore/src/azure_subscription_boilerplate/iac/common_services_deployment.sh
+    # shellcheck source=/workspaces/demo_mlstudio/iac/common_services_deployment.sh
     source "${INFRA_DIRECTORY}/common_services_deployment.sh" "$seed" --parameters "${additional_parameters[@]}"
 }
 
@@ -160,7 +160,7 @@ provision_aml_workspace(){
 
     echo "Deploying ${deployment_name} with ${additional_parameters[*]}"
 
-    # shellcheck source=/home/brlamore/src/azure_subscription_boilerplate/iac/aml_workspace_deployment.sh
+    # shellcheck source=/workspaces/demo_mlstudio/iac/aml_workspace_deployment.sh
     source "${INFRA_DIRECTORY}/aml_workspace_deployment.sh" --parameters "${additional_parameters[@]}"
 }
 

@@ -1,0 +1,2 @@
+[tool.codespell]
+skip = 'package-lock.json,./node_modules'

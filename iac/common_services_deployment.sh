@@ -29,7 +29,7 @@ generate_password(){
         choose "$CHAR_NUMERIC"
         choose "$CHAR_ALPHA_LOWER"
         choose "$CHAR_ALPHA_UPPER"
-        for _i in $( seq 1 $(( 4 + RANDOM % 6 )) )
+        for _ in $( seq 1 $(( 4 + RANDOM % 6 )) )
         do
             choose "$CHAR_ALPHA_NUMERIC_SPECIAL"
         done
@@ -39,7 +39,7 @@ generate_password(){
 }
 generate_username() {
     {
-        for _i in $( seq 1 $(( 8 + RANDOM % 4 )) )
+        for _ in $( seq 1 $(( 8 + RANDOM % 4 )) )
         do
             choose "$CHAR_ALPHA_NUMERIC"
         done
@@ -100,7 +100,7 @@ main(){
   # Jumpbox
    if [ "$jumpbox" = "true" ]; then
         echo Creating jumpbox
-        
+
         if result=$(az vm create \
             --resource-group "$rg_name" \
             --name "$vm_jumpbox_name" \

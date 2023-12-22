@@ -12,8 +12,8 @@ main(){
     name="aml"
     location="westus3"
     rg_name="rg_${name}_${location}"
-    workspace_name="ws-${name}-${location}"
-    storage_name="st${name}${location}"
+    # workspace_name="ws-${name}-${location}"
+    # storage_name="st${name}${location}"
 
 
     # Parse arguments
@@ -36,10 +36,10 @@ main(){
             ;;
         esac
     done
-    
+
     # Resource Group
     echo create_resource_group "$rg_name" "$location"
-    
+
     # $schema: https://azuremlschemas.azureedge.net/latest/workspace.schema.json
     # name: "$workspace_name"
     # location: "$location"
@@ -53,7 +53,7 @@ main(){
     # application_insights: /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/Microsoft.insights/components/<APP_INSIGHTS>
     # tags:
     #   purpose: demonstration
-    
+
     # Workspace
     echo "creating workspace in $rg_name"
     az ml workspace create --resource-group "$rg_name" --file workspace.yml
